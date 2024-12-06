@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.Rprofile
+.Rbuildignore
+renv/
+.DS_Store
