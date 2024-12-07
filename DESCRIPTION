@@ -13,3 +13,5 @@ Imports:
     data.table (>= 1.16),
     rlang
 RoxygenNote: 7.3.2
+Suggests: 
+    testthat
