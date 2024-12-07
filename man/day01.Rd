@@ -25,6 +25,9 @@ dt_01_distance(x)
 
 dt_01_similarity(x)
 }
+\arguments{
+\item{x}{processed puzzle input from `dt_01_input`}
+}
 \description{
 Functions to solve Day 01 puzzles.
 }

@@ -1,3 +1,4 @@
+
 #' Day 01 Solutions: Historian Hysteria
 #'
 #' Functions to solve Day 01 puzzles.
@@ -35,13 +36,15 @@ NULL
 
 # Base R Functions -------------------------------------------------------------
 
+#' @param x path of puzzle input
 #' @rdname day01
 #' @export
 base_01_input <- function(x) {
   if (!file.exists(x)) stop("File does not exist.")
-  read.delim(x, header = FALSE)
+  utils::read.delim(x, header = FALSE)
 }
 
+#' @param x puzzle input from `base_01_input`
 #' @rdname day01
 #' @export
 base_01_process <- function(x) {
@@ -51,6 +54,7 @@ base_01_process <- function(x) {
     do.call(rbind, args = _)
 }
 
+#' @param x processed puzzle input from `base_01_process`
 #' @rdname day01
 #' @export
 base_01_distance <- function(x) {
@@ -59,6 +63,7 @@ base_01_distance <- function(x) {
     sum()
 }
 
+#' @param x processed puzzle input from `base_01_process`
 #' @rdname day01
 #' @export
 base_01_similarity <- function(x) {
@@ -70,24 +75,27 @@ base_01_similarity <- function(x) {
 
 # data.table Functions ---------------------------------------------------------
 
+#' @param x path of puzzle input
 #' @rdname day01
 #' @import data.table
 #' @export
-dt_01_input <- function(x) fread('inst/input01.txt', header = FALSE)
+dt_01_input <- function(x) data.table::fread(x, header = FALSE)
 
+#' @param x processed puzzle input from `dt_01_input`
 #' @rdname day01
 #' @export
 dt_01_distance <- function(x){
   sum(abs(sort(x[[1]]) - sort(x[[2]])))
 }
 
+#' @param x processed puzzle input from `dt_01_input`
 #' @rdname day01
 #' @export
 dt_01_similarity <- function(x) {
-  CJ(dat$V1, dat$V2)[
+  data.table::CJ(x$V1, x$V2)[
     V1 == V2,
-    .(n = .N, weighted_sum = V1 * .N),
-    by = V1
+    list(n = .N, weighted_sum = V1 * .N),
+    by = c('V1')
   ][
     ,
     sum(weighted_sum)
